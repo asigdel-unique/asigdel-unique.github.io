@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ashok Sigdel — Biomedical Engineer & Researcher</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --warm-bg: #fdf8f3; --warm-surface: #faf4ec; --warm-card: #fff9f4;
+      --warm-accent: #c17a3b; --warm-accent-light: #f0e0cc; --warm-accent-dark: #8a5520;
+      --warm-text: #2d2318; --warm-muted: #7a6654; --warm-border: rgba(150,100,50,0.15);
+      --serif: 'Lora', Georgia, serif; --sans: 'DM Sans', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--warm-bg); color: var(--warm-text); font-family: var(--sans); font-size: 16px; line-height: 1.7; }
+
+    .site { max-width: 880px; margin: 0 auto; padding: 0 1.5rem 5rem; }
+
+    /* NAV */
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.5rem 0 1rem; border-bottom: 1px solid var(--warm-border);
+      margin-bottom: 3rem; position: sticky; top: 0;
+      background: var(--warm-bg); z-index: 100;
+    }
+    .nav-logo { font-family: var(--serif); font-size: 18px; font-weight: 500; color: var(--warm-accent-dark); letter-spacing: -0.3px; text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a { font-size: 13px; color: var(--warm-muted); text-decoration: none; letter-spacing: 0.5px; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--warm-accent); }
+
+    /* SECTIONS */
+    .section { display: none; animation: fadeUp 0.4s ease; }
+    .section.visible { display: block; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+    /* ABOUT */
+    .hero { display: grid; grid-template-columns: 1fr 160px; gap: 3rem; align-items: start; margin-bottom: 3rem; }
+    .hero-text h1 { font-family: var(--serif); font-size: 38px; font-weight: 500; line-height: 1.2; margin-bottom: 0.4rem; }
+    .hero-text h1 em { font-style: italic; color: var(--warm-accent); }
+    .hero-sub { font-size: 14px; color: var(--warm-muted); margin-bottom: 1.25rem; letter-spacing: 0.3px; }
+    .hero-bio { font-size: 15px; line-height: 1.8; color: var(--warm-text); }
+    .avatar {
+      width: 140px; height: 140px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--warm-accent-light), #e8c99a);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif); font-size: 42px; font-weight: 500;
+      color: var(--warm-accent-dark); flex-shrink: 0; border: 3px solid var(--warm-border);
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.25rem; }
+    .tag { font-size: 12px; padding: 4px 12px; border-radius: 20px; background: var(--warm-accent-light); color: var(--warm-accent-dark); }
+    .links-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 1.25rem; }
+    .link-btn {
+      font-size: 12px; padding: 6px 14px; border-radius: 6px; cursor: pointer;
+      font-family: var(--sans); border: 1px solid var(--warm-border);
+      background: var(--warm-card); color: var(--warm-muted); text-decoration: none;
+      transition: all 0.2s; display: inline-flex; align-items: center; gap: 5px;
+    }
+    .link-btn:hover { border-color: var(--warm-accent); color: var(--warm-accent); }
+
+    /* SKILLS */
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2.5rem; }
+    .skill-group { background: var(--warm-card); border: 1px solid var(--warm-border); border-radius: 10px; padding: 1rem 1.25rem; }
+    .skill-group h4 { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--warm-accent); margin-bottom: 0.75rem; font-weight: 500; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .skill-tag { font-size: 12px; padding: 3px 10px; border-radius: 4px; background: var(--warm-surface); color: var(--warm-muted); border: 1px solid var(--warm-border); }
+
+    /* AWARDS */
+    .awards { margin-top: 2.5rem; }
+    .awards h3 { font-family: var(--serif); font-size: 20px; font-weight: 500; margin-bottom: 1rem; }
+    .award-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 0.75rem; padding: 0.75rem 1rem; background: var(--warm-card); border: 1px solid var(--warm-border); border-radius: 8px; }
+    .award-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--warm-accent); flex-shrink: 0; margin-top: 6px; }
+    .award-text { font-size: 14px; line-height: 1.5; }
+
+    /* SECTION HEADER */
+    .section-header { margin-bottom: 2rem; }
+    .section-header h2 { font-family: var(--serif); font-size: 28px; font-weight: 500; margin-bottom: 0.4rem; }
+    .section-header p { font-size: 14px; color: var(--warm-muted); }
+
+    /* PROJECTS */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.25rem; }
+    .proj-card {
+      background: var(--warm-card); border: 1px solid var(--warm-border);
+      border-radius: 12px; padding: 1.25rem 1.5rem;
+      transition: border-color 0.2s, transform 0.2s; position: relative; overflow: hidden;
+    }
+    .proj-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--warm-accent); transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+    }
+    .proj-card:hover { border-color: var(--warm-accent); transform: translateY(-2px); }
+    .proj-card:hover::before { transform: scaleX(1); }
+    .proj-type { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--warm-accent); margin-bottom: 0.5rem; font-weight: 500; }
+    .proj-title { font-family: var(--serif); font-size: 16px; font-weight: 500; margin-bottom: 0.5rem; line-height: 1.35; }
+    .proj-desc { font-size: 13px; color: var(--warm-muted); line-height: 1.65; margin-bottom: 1rem; }
+    .proj-stack { display: flex; flex-wrap: wrap; gap: 6px; }
+    .proj-tech { font-size: 11px; padding: 3px 9px; border-radius: 4px; background: var(--warm-surface); color: var(--warm-muted); border: 1px solid var(--warm-border); }
+
+    /* EXPERIENCE */
+    .exp-section-title { font-family: var(--serif); font-size: 20px; font-weight: 500; margin: 2.5rem 0 1rem; }
+    .exp-list { display: flex; flex-direction: column; gap: 1.25rem; }
+    .exp-item { background: var(--warm-card); border: 1px solid var(--warm-border); border-radius: 10px; padding: 1.25rem 1.5rem; }
+    .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.4rem; flex-wrap: wrap; gap: 6px; }
+    .exp-title { font-family: var(--serif); font-size: 16px; font-weight: 500; }
+    .exp-date { font-size: 12px; color: var(--warm-muted); background: var(--warm-surface); padding: 3px 10px; border-radius: 20px; border: 1px solid var(--warm-border); white-space: nowrap; }
+    .exp-org { font-size: 13px; color: var(--warm-accent); margin-bottom: 0.75rem; font-style: italic; }
+    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .exp-bullets li { font-size: 13px; line-height: 1.6; color: var(--warm-text); padding-left: 14px; position: relative; }
+    .exp-bullets li::before { content: '·'; position: absolute; left: 0; color: var(--warm-accent); font-size: 18px; line-height: 1.2; }
+
+    /* PUBLICATIONS */
+    .pub-list { display: flex; flex-direction: column; gap: 1.25rem; }
+    .pub-item { background: var(--warm-card); border: 1px solid var(--warm-border); border-radius: 10px; padding: 1.25rem 1.5rem; display: grid; grid-template-columns: 56px 1fr; gap: 1rem; align-items: start; }
+    .pub-year { font-size: 13px; color: var(--warm-accent); font-weight: 500; background: var(--warm-accent-light); border-radius: 6px; padding: 6px 8px; text-align: center; line-height: 1.3; }
+    .pub-title { font-family: var(--serif); font-size: 16px; font-weight: 500; margin-bottom: 0.35rem; line-height: 1.35; }
+    .pub-venue { font-size: 13px; color: var(--warm-accent); margin-bottom: 0.35rem; font-style: italic; }
+    .pub-authors { font-size: 12px; color: var(--warm-muted); margin-bottom: 0.5rem; }
+    .pub-abstract { font-size: 13px; color: var(--warm-text); line-height: 1.6; }
+    .pub-doi { font-size: 12px; color: var(--warm-accent); margin-top: 0.5rem; display: inline-block; }
+    .pub-tags { display: flex; gap: 6px; margin-top: 0.75rem; flex-wrap: wrap; }
+    .pub-tag { font-size: 11px; padding: 2px 8px; border-radius: 4px; background: var(--warm-surface); color: var(--warm-muted); border: 1px solid var(--warm-border); }
+
+    /* BLOG */
+    .blog-list { display: flex; flex-direction: column; gap: 1.5rem; }
+    .blog-card { background: var(--warm-card); border: 1px solid var(--warm-border); border-radius: 12px; padding: 1.5rem; transition: border-color 0.2s; }
+    .blog-card:hover { border-color: rgba(150,100,50,0.4); }
+    .blog-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 0.75rem; }
+    .blog-cat { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--warm-accent); font-weight: 500; }
+    .blog-date { font-size: 12px; color: var(--warm-muted); }
+    .blog-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--warm-border); display: inline-block; }
+    .blog-title { font-family: var(--serif); font-size: 20px; font-weight: 500; margin-bottom: 0.5rem; line-height: 1.3; }
+    .blog-excerpt { font-size: 14px; color: var(--warm-muted); line-height: 1.7; }
+    .blog-body { font-size: 15px; line-height: 1.85; margin-top: 1rem; display: none; border-top: 1px solid var(--warm-border); padding-top: 1rem; }
+    .blog-body.open { display: block; }
+    .blog-toggle { font-size: 13px; color: var(--warm-accent); margin-top: 1rem; cursor: pointer; display: inline-block; background: none; border: none; font-family: var(--sans); padding: 0; }
+
+    /* FOOTER */
+    footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--warm-border); text-align: center; font-size: 13px; color: var(--warm-muted); }
+    footer a { color: var(--warm-accent); text-decoration: none; }
+
+    @media (max-width: 600px) {
+      .hero { grid-template-columns: 1fr; }
+      .avatar { width: 80px; height: 80px; font-size: 26px; order: -1; }
+      .hero-text h1 { font-size: 28px; }
+      .nav-links { gap: 1.1rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .pub-item { grid-template-columns: 1fr; }
+      .exp-header { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+<div class="site">
+  <nav>
+    <a class="nav-logo" href="#" onclick="show('about'); return false;">Ashok Sigdel</a>
+    <div class="nav-links">
+      <a href="#" onclick="show('about'); return false;" class="active" id="nav-about">About</a>
+      <a href="#" onclick="show('projects'); return false;" id="nav-projects">Projects</a>
+      <a href="#" onclick="show('publications'); return false;" id="nav-publications">Publications</a>
+      <a href="#" onclick="show('blog'); return false;" id="nav-blog">Blog</a>
+    </div>
+  </nav>
+
+  <!-- ABOUT -->
+  <div id="about" class="section visible">
+    <div class="hero">
+      <div class="hero-text">
+        <h1>Hi, I'm <em>Ashok</em> Sigdel.</h1>
+        <p class="hero-sub">Biomedical Engineer · MEMS Researcher · Six Sigma Black Belt</p>
+        <p class="hero-bio">I'm a biomedical engineer and published researcher with 3+ years of hands-on cleanroom microfabrication experience — building flexible neural MEMS devices using photolithography, PVD, and RIE dry etching. Based in Ruston, LA, I work at the intersection of neurotechnology, precision fabrication, and data-driven process improvement.</p>
+        <div class="tags">
+          <span class="tag">Neural Interfaces</span>
+          <span class="tag">Microfabrication</span>
+          <span class="tag">MEMS</span>
+          <span class="tag">Six Sigma</span>
+          <span class="tag">COMSOL</span>
+          <span class="tag">Published Researcher</span>
+        </div>
+        <div class="links-row">
+          <a class="link-btn" href="mailto:sigdelashok05@gmail.com">✉ Email</a>
+          <a class="link-btn" href="https://linkedin.com/in/ashok-sigdel-5789061b4" target="_blank">in LinkedIn</a>
+          <span class="link-btn">📍 Ruston, LA · Open to Relocation</span>
+        </div>
+      </div>
+      <div class="avatar">AS</div>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h4>Fabrication</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">Photolithography</span>
+          <span class="skill-tag">PVD / Sputtering</span>
+          <span class="skill-tag">RIE Dry Etching</span>
+          <span class="skill-tag">Lift-Off</span>
+          <span class="skill-tag">Spin Coating</span>
+          <span class="skill-tag">Cleanroom</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Characterization</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">SEM / Failure Analysis</span>
+          <span class="skill-tag">Raman Spectroscopy</span>
+          <span class="skill-tag">Profilometry</span>
+          <span class="skill-tag">Optical Microscopy</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Simulation & Software</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">COMSOL Multiphysics</span>
+          <span class="skill-tag">SolidWorks FEA</span>
+          <span class="skill-tag">MATLAB</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">LTspice</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Quality & Regulatory</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">Six Sigma Black Belt</span>
+          <span class="skill-tag">DMAIC / DoE</span>
+          <span class="skill-tag">FDA 21 CFR Part 820</span>
+          <span class="skill-tag">SPC / ANOVA</span>
+          <span class="skill-tag">Minitab / JMP</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="awards">
+      <h3>Honors & Leadership</h3>
+      <div class="award-item"><div class="award-dot"></div><div class="award-text"><strong>Best Student Paper Award</strong> — ASME IMECE 2025, Neural Electrode Research</div></div>
+      <div class="award-item"><div class="award-dot"></div><div class="award-text"><strong>President</strong> — Namaste Nepal Association (2024–2025)</div></div>
+      <div class="award-item"><div class="award-dot"></div><div class="award-text">Member, Biomedical Engineering Society (BMES) & International Student Association</div></div>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div id="projects" class="section">
+    <div class="section-header">
+      <h2>Projects</h2>
+      <p>Research, engineering, and design work I've built and shipped.</p>
+    </div>
+    <div class="projects-grid">
+      <div class="proj-card">
+        <div class="proj-type">Neural Engineering</div>
+        <div class="proj-title">Flexible Glassy Carbon Neural Electrode Arrays</div>
+        <div class="proj-desc">Independently executed full microfabrication workflows for flexible glassy carbon neural electrode arrays, sustaining 93% fabrication yield across 50+ batches. Achieved 25% yield improvement through systematic PVD and photoresist optimization.</div>
+        <div class="proj-stack">
+          <span class="proj-tech">Photolithography</span>
+          <span class="proj-tech">PVD</span>
+          <span class="proj-tech">RIE Etching</span>
+          <span class="proj-tech">SEM</span>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-type">Senior Design</div>
+        <div class="proj-title">Adaptive Gaming Table for Individuals with Disabilities</div>
+        <div class="proj-desc">Designed ergonomic mounting arms and vest-mounted controller structures for a teen with spastic quadriplegia. SolidWorks FEA confirmed Factor of Safety ≥ 3.0 under 15 lb load. Delivered prototype with under 2-minute setup, no instructions needed.</div>
+        <div class="proj-stack">
+          <span class="proj-tech">SolidWorks</span>
+          <span class="proj-tech">FEA</span>
+          <span class="proj-tech">Prototyping</span>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-type">Simulation</div>
+        <div class="proj-title">Drug Delivery Analysis during Respiration</div>
+        <div class="proj-desc">Modeled inhaled particle transport across 3 breathing patterns (rest, deep, rapid) using COMSOL finite element simulation. Predicted 15–20% improvement in pulmonary drug delivery efficiency under optimized airflow conditions.</div>
+        <div class="proj-stack">
+          <span class="proj-tech">COMSOL</span>
+          <span class="proj-tech">FEM</span>
+          <span class="proj-tech">Mass Transport</span>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-type">Embedded Systems</div>
+        <div class="proj-title">Aqua Alert — Automated Leak Detection System</div>
+        <div class="proj-desc">Built a sensor-based water leakage detection system with under 2-second response and 100% alert reliability across 30+ trial runs. Integrated GSM SMS alerts with under 1-second latency. Recognized at Freshman Expo for practical design.</div>
+        <div class="proj-stack">
+          <span class="proj-tech">Sensors</span>
+          <span class="proj-tech">GSM</span>
+          <span class="proj-tech">Embedded C</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="exp-section-title">Experience</p>
+    <div class="exp-list">
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-title">Research Assistant — Neural Electrode Microfabrication</div>
+          <div class="exp-date">Oct 2021 – Nov 2025</div>
+        </div>
+        <div class="exp-org">Neural Electrode Interface Technologies Lab, Louisiana Tech University (PI: Dr. Castagnola) · Ruston, LA</div>
+        <ul class="exp-bullets">
+          <li>Executed full microfabrication workflows for flexible glassy carbon neural electrode arrays; 93% yield across 50+ batches.</li>
+          <li>Achieved 25% yield increase through systematic PVD deposition and photoresist exposure optimization.</li>
+          <li>Performed SEM imaging, profilometry, and Raman spectroscopy for structural characterization and failure mode analysis.</li>
+          <li>Co-authored peer-reviewed publication in Frontiers in Bioengineering & Biotechnology (2025).</li>
+        </ul>
+      </div>
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-title">Six Sigma Black Belt Project Lead</div>
+          <div class="exp-date">Sep 2025 – Present</div>
+        </div>
+        <div class="exp-org">Dis-Tran Steel LLC · Pineville, LA</div>
+        <ul class="exp-bullets">
+          <li>Applied DMAIC across plasma burn table and press brake processes, boosting throughput 31% (67→88 sheets/day).</li>
+          <li>Identified top 3 bottlenecks through scrap trending and thickness-based variation analysis across 29 work orders using ANOVA and SPC, reducing queue delays by 25–30%.</li>
+          <li>Standardized 8+ SOPs; implemented sheet-sorting, crane-movement optimization, and scrap-removal triggers, improving shift-to-shift consistency by 20%.</li>
+        </ul>
+      </div>
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-title">Teaching Assistant — Microfabrication & Flexible Device Characterization</div>
+          <div class="exp-date">Mar 2024 – May 2025</div>
+        </div>
+        <div class="exp-org">Louisiana Tech University (BIEN 450C-001) · Ruston, LA</div>
+        <ul class="exp-bullets">
+          <li>Guided 17 students through 9 cleanroom lab sessions covering spin coating, mask alignment, and metal sputtering for flexible bioelectronic devices.</li>
+          <li>Enforced cleanroom safety protocols and SOPs, reducing unplanned equipment downtime by 50%.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PUBLICATIONS -->
+  <div id="publications" class="section">
+    <div class="section-header">
+      <h2>Publications</h2>
+      <p>Peer-reviewed research and academic contributions.</p>
+    </div>
+    <div class="pub-list">
+      <div class="pub-item">
+        <div class="pub-year">2025</div>
+        <div>
+          <div class="pub-title">Advancing Glassy Carbon Microelectrode Arrays for Neurochemical Sensing: Impact of Double Pyrolysis on Structure and Function</div>
+          <div class="pub-venue">Frontiers in Bioengineering and Biotechnology, Vol. 13</div>
+          <div class="pub-authors">Sellen S., Siwakoti U., Sigdel A. et al.</div>
+          <div class="pub-abstract">Investigates how double pyrolysis affects the structural and functional properties of glassy carbon microelectrode arrays, with implications for improved neurochemical sensing performance in neural interface applications.</div>
+          <a class="pub-doi" href="https://doi.org/10.3389/fbioe.2025.1642063" target="_blank">DOI: 10.3389/fbioe.2025.1642063 →</a>
+          <div class="pub-tags">
+            <span class="pub-tag">Neural Interfaces</span>
+            <span class="pub-tag">MEMS</span>
+            <span class="pub-tag">Glassy Carbon</span>
+            <span class="pub-tag">Neurochemical Sensing</span>
+            <span class="pub-tag">Peer Reviewed</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOG -->
+  <div id="blog" class="section">
+    <div class="section-header">
+      <h2>Blog & Opinions</h2>
+      <p>Essays, reflections, and random thoughts I find worth sharing.</p>
+    </div>
+    <div class="blog-list">
+      <div class="blog-card">
+        <div class="blog-meta">
+          <span class="blog-cat">Research Life</span>
+          <span class="blog-dot"></span>
+          <span class="blog-date">Coming soon</span>
+        </div>
+        <div class="blog-title">What Nobody Tells You About Working in a Cleanroom</div>
+        <div class="blog-excerpt">Three years of photolithography, PVD runs, and SEM imaging — and the unexpected lessons that had nothing to do with fabrication.</div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-meta">
+          <span class="blog-cat">Opinion</span>
+          <span class="blog-dot"></span>
+          <span class="blog-date">Coming soon</span>
+        </div>
+        <div class="blog-title">Six Sigma in the Real World: What the Textbook Doesn't Prepare You For</div>
+        <div class="blog-excerpt">A Black Belt project in a steel plant taught me more about people, processes, and humility than any certification ever could.</div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-meta">
+          <span class="blog-cat">Personal</span>
+          <span class="blog-dot"></span>
+          <span class="blog-date">Coming soon</span>
+        </div>
+        <div class="blog-title">From Nepal to Louisiana: Finding My Place in Research</div>
+        <div class="blog-excerpt">On culture shock, curiosity, and what it means to build something meaningful far from home.</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 Ashok Sigdel · Ruston, LA · <a href="mailto:sigdelashok05@gmail.com">sigdelashok05@gmail.com</a> · <a href="https://linkedin.com/in/ashok-sigdel-5789061b4" target="_blank">LinkedIn</a></p>
+  </footer>
+</div>
+
+<script>
+  function show(sec) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('visible'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById(sec).classList.add('visible');
+    document.getElementById('nav-' + sec).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
